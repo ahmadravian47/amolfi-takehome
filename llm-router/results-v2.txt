@@ -1,0 +1,61 @@
+
+> llm-router@1.0.0 evaluate
+> tsx scripts/evaluate.ts
+
+
+=== Routing evaluation ===
+
+id    expected  actual   ok    task
+------------------------------------------------------------------------------------------
+t01   cheap     cheap   yes   Classify the sentiment of this review: 'The battery ...
+t02   cheap     cheap   yes   Extract all email addresses from this text: 'Contact...
+t03   cheap     cheap   yes   Translate 'Ahmad Touseef' into Spanish.
+t04   strong    cheap   NO    Buid me a login signup module in JavaScript
+t05   cheap     cheap   yes   Tag this support ticket with one category: 'My invoi...
+t06   strong    cheap   NO    Who was Charles babbage? What did he invented?
+t07   strong    cheap   NO    Was Newton right about speed of Gravity? if no where...
+t08   strong    cheap   NO    How Laplace corrected Newton in speed of light?
+t09   strong    strong  yes   Design a database schema for a multi-tenant SaaS app...
+t10   strong    strong  yes   Compare PostgreSQL and MongoDB for a write-heavy IoT...
+t11   strong    strong  yes   Explain me why Newton failed in finding speed of light?
+t12   strong    strong  yes   Explain why the CAP theorem forces trade-offs in dis...
+t13   strong    strong  yes   Evaluate the business case for migrating our monolit...
+t14   strong    strong  yes   Is P = NP?
+t15   strong    strong  yes   Explain how a B-tree index works in PostgreSQL.
+t16   strong    cheap   NO    Summarize this 4000-word legal contract into a one-p...
+t17   cheap     cheap   yes   Write a haiku about autumn.
+t18   cheap     strong  NO    Compare apples and oranges.
+t19   strong    strong  yes   Given the following 50 customer reviews, identify th...
+t20   cheap     cheap   yes   What's the difference between a stack and a queue?
+
+=== Summary ===
+
+Accuracy: 14/20 (70.0%)
+Misrouted: 6
+
+=== Misrouted ===
+
+t04: expected strong, got cheap
+     task:   Buid me a login signup module in JavaScript
+     reason: no strong signal; defaulting to cheap
+
+t06: expected strong, got cheap
+     task:   Who was Charles babbage? What did he invented?
+     reason: no strong signal; defaulting to cheap
+
+t07: expected strong, got cheap
+     task:   Was Newton right about speed of Gravity? if no where...
+     reason: no strong signal; defaulting to cheap
+
+t08: expected strong, got cheap
+     task:   How Laplace corrected Newton in speed of light?
+     reason: no strong signal; defaulting to cheap
+
+t16: expected strong, got cheap
+     task:   Summarize this 4000-word legal contract into a one-p...
+     reason: no strong signal; defaulting to cheap
+
+t18: expected cheap, got strong
+     task:   Compare apples and oranges.
+     reason: complexity verb detected: "compare"
+
