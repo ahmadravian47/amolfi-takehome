@@ -9,8 +9,8 @@
 export type ModelTier = "cheap" | "strong";
 
 export type ModelId =
-  | "llama-3.1-8b-instant"
-  | "llama-3.3-70b-versatile";
+  | "openai/gpt-oss-20b"
+  | "qwen/qwen3.8-27b";
 
 export interface ModelSpec {
   /** The provider's model identifier, sent on every API call. */
@@ -28,20 +28,20 @@ export interface ModelSpec {
 }
 
 export const MODELS: Record<ModelId, ModelSpec> = {
-  "llama-3.1-8b-instant": {
-    id: "llama-3.1-8b-instant",
-    label: "Llama 3.1 8B (instant)",
+  "openai/gpt-oss-20b": {
+    id: "openai/gpt-oss-20b",
+    label: "GPT-OSS 20B",
     tier: "cheap",
-    inputCostPer1M: 0.05,
-    outputCostPer1M: 0.08,
+    inputCostPer1M: 0.075,
+    outputCostPer1M: 0.30,
     contextWindow: 131072,
   },
-  "llama-3.3-70b-versatile": {
-    id: "llama-3.3-70b-versatile",
-    label: "Llama 3.3 70B (versatile)",
+  "qwen/qwen3.8-27b": {
+    id: "qwen/qwen3.8-27b",
+    label: "Qwen 3.8 27B",
     tier: "strong",
-    inputCostPer1M: 0.59,
-    outputCostPer1M: 0.79,
+    inputCostPer1M: 0.80,
+    outputCostPer1M: 4.00,
     contextWindow: 131072,
   },
 };
