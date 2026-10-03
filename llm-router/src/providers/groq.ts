@@ -45,7 +45,7 @@ export async function complete(
         : []),
       { role: "user" as const, content: prompt },
     ],
-    max_tokens: options.maxTokens ?? 1024,
+    max_tokens: options.maxTokens ?? 512,
     temperature: options.temperature ?? 0.7,
   });
 
