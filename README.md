@@ -4,7 +4,7 @@ Two exercises for the Amolfi founding engineer interview.
 
 | Exercise | Stack | Status | Links |
 |---|---|---|---|
-| **LLM Router** | Node, TypeScript, Express, Groq | Complete | [README](./llm-router/README.md) · [Live API](TODO) |
+| **LLM Router** | Node, TypeScript, Express, Groq | Complete | [README](./llm-router/README.md) · [Live API](https://swear-emotion-corral.ngrok-free.dev) |
 | **Logo Animation** | Vite, TypeScript, GSAP | Pending source SVG | [README](./logo-animation/README.md) |
 
 ## LLM Router

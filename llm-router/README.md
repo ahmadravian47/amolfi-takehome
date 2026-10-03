@@ -163,8 +163,16 @@ npm run build && npm start  # production build
 
 ## Live
 
-- API base: `TODO: live URL`
-- Health: `TODO: live URL/health`
+- API base: `https://swear-emotion-corral.ngrok-free.dev`
+- Health: `https://swear-emotion-corral.ngrok-free.dev/health`
+
+Quick check:
+
+```bash
+curl https://swear-emotion-corral.ngrok-free.dev/health
+curl -X POST https://swear-emotion-corral.ngrok-free.dev/chat \
+  -H "Content-Type: application/json" \
+  -d '{"task":"Classify the sentiment: I love this product"}'
 
 ## Repo
 
