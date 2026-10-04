@@ -102,7 +102,7 @@ reasoning; `"What's 2 + 2?"` is also 10 characters and doesn't.
 **v2 changes:**
 
 1. Removed the length-based cheap rule entirely.
-2. Added **complexity verbs** (`build`, `explain`, `implement`, ...) —
+2. Added **complexity verbs** (`build`, `explain`, `implement`, ...)
    these imply substantial output even when the input is short.
 3. Added **topic-complexity words** (`algorithm`, `compiler`, `theorem`, ...).
 4. Broadened `"explain why"` → `"explain"` so `"explain how"` also matches.
@@ -123,7 +123,7 @@ The remaining 6 failures are the honest ceiling of keyword routing:
 | `"Compare apples and oranges"` | Contains `"compare"` (strong keyword) but is trivial |
 
 **Five of six require semantic understanding of the task, not keyword
-matching.** The next step would be embedding-based routing — see below.
+matching.** The next step would be embedding-based routing see below.
 
 ## What I'd do with more time
 
@@ -140,7 +140,7 @@ In rough priority order:
    duplicates. Meaningful cost saving on repetitive workloads.
 4. **Metrics dashboard.** Persist every request to SQLite; expose `/metrics`
    with cost-by-tier, latency p50/p99, cache hit rate.
-5. **Unit tests.** `route()` is a pure function — trivially testable. I'd
+5. **Unit tests.** `route()` is a pure function trivially testable. I'd
    lock in v2's behavior with a table-driven test suite before the next
    iteration.
 6. **Streaming responses.** Currently synchronous. Streaming would improve

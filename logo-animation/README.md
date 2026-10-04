@@ -2,13 +2,13 @@
 
 Animated SVG logo for Amolfi. On load, the spiral spins and settles. The wordmark stays still.
 
-Live demo: TODO: live URL
+![Animation demo](./demo.mp4)
 
 ## What it does
 
 The logo fades in, then the spiral performs two full decelerating turns (about 4 seconds total). Then everything rests.
 
-It's deliberately not a loop. A spinning logo gets annoying fast — one that arrives and stops feels confident.
+It's deliberately not a loop. A spinning logo gets annoying fast one that arrives and stops feels confident.
 
 ## Stack
 
@@ -25,7 +25,7 @@ The SVG has two groups:
 
 The animation only touches `#amolfi-spiral`. The wordmark fades in at the start and never moves after that.
 
-Rotation origin is set to the spiral's visual center. Getting this wrong is what makes amateur SVG animations wobble — the mark ends up orbiting the SVG's top-left corner instead of its own axis.
+Rotation origin is set to the spiral's visual center. Getting this wrong is what makes amateur SVG animations wobble the mark ends up orbiting the SVG's top-left corner instead of its own axis.
 
 ## Easing choices
 
@@ -41,10 +41,6 @@ Rotation origin is set to the spiral's visual center. Getting this wrong is what
 - 0.9–3.9s: spiral spins 2 turns, decelerating
 - After 3.9s: everything still
 
-## Accessibility
-
-`prefers-reduced-motion` is respected. Users who've asked for reduced motion see the logo rendered immediately, no animation.
-
 ## Performance
 
 Transform-only animation, GPU-composited. 60fps in DevTools.
@@ -52,18 +48,14 @@ Transform-only animation, GPU-composited. 60fps in DevTools.
 ## Running locally
 
     npm install
-    npm run dev      # localhost:5173
-    npm run build    # production build
+    npm run dev      
+    npm run build    
 
 ## With more time
 
 - **Designer pass.** Easing and timing are my call. A designer would likely tune both.
-- **Hover interaction.** A subtle re-spin on hover would work in an interactive context. Didn't add it — the brief was a standalone animation.
+- **Hover interaction.** A subtle re-spin on hover would work in an interactive context. Didn't add it the brief was a standalone animation.
 - **Dark background variant.** The wordmark is `#171717`; it'd need a light version for dark UIs.
-
-## Note on the source file
-
-The email attachment was a 180×180 JPEG. I asked for the original SVG instead of tracing the raster — traced letterforms look off, and the spiral's curve was designed precisely. The source SVG is committed as `amolfi-logo.svg`.
 
 ## Repo
 

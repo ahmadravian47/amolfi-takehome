@@ -5,7 +5,7 @@ Two exercises for the Amolfi founding engineer interview.
 | Exercise | Stack | Status | Links |
 |---|---|---|---|
 | **LLM Router** | Node, TypeScript, Express, Groq | Complete | [README](./llm-router/README.md) · [Live API](https://swear-emotion-corral.ngrok-free.dev) |
-| **Logo Animation** | Vite, TypeScript, GSAP | Pending source SVG | [README](./logo-animation/README.md) |
+| **Logo Animation** | Vite, TypeScript, GSAP | Complete | [README](./logo-animation/README.md) |
 
 ## LLM Router
 
@@ -17,13 +17,12 @@ evaluation and the iteration story from v1 (50% routing accuracy) to v2 (70%).
 
 ## Logo Animation
 
-Animated SVG logo — the spiral spins, the wordmark stays still.
+Animated SVG logo the spiral spins, the wordmark stays still.
 
-**Status: pending source asset.** The version in the take-home email is a
-180×180 JPEG (raster), not the vector original. I've requested the source
-`.svg`; the animation is scoped and ready to apply once it arrives.
+On load, the spiral fades in and performs two decelerating turns (~4s),
+then rests. The wordmark fades in once and never moves after that.
 
-→ [Full write-up](./logo-animation/README.md)
+→ [Full write-up](./logo-animation/README.md) · Demo video at the top of that README
 
 ## Repo structure
 amolfi-takehome/
@@ -31,5 +30,5 @@ amolfi-takehome/
 │ ├── src/
 │ ├── scripts/
 │ └── README.md
-└── logo-animation/ # Frontend exercise (pending SVG)
+└── logo-animation/ # Frontend exercise
 └── README.md
