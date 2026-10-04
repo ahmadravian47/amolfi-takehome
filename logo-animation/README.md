@@ -1,31 +1,70 @@
 # logo-animation
 
-Animated SVG logo — the spiral spins, the wordmark stays still.
+Animated SVG logo for Amolfi. On load, the spiral spins and settles. The wordmark stays still.
 
-**Status: pending source asset.**
+Live demo: TODO: live URL
 
-The version included in the take-home email is a 180×180 JPEG (raster),
-not the vector original (see `reference-from-email.jpg` in this folder).
-I've requested the source `.svg` from James — the animation will be
-applied to that file once it arrives.
+## What it does
 
-## Plan (once the SVG lands)
+The logo fades in, then the spiral performs two full decelerating turns (about 4 seconds total). Then everything rests.
 
-- **Stack:** Vite + TypeScript + GSAP
-- **Easing:** custom cubic-bezier; non-uniform rotation so the loop "breathes"
-  instead of feeling mechanical
-- **Rotation origin:** the spiral's visual center, handled by wrapping it in a
-  translated `<g>` — not rotating the SVG root, which is what causes the
-  wobble you see in most amateur SVG animations
-- **Accessibility:** `prefers-reduced-motion` disables the infinite loop but
-  keeps a one-shot entrance
-- **Performance:** transform-only animation (GPU-composited); target 60fps,
-  verified in DevTools
-- **Entrance:** 200–400ms scale + fade so the logo doesn't pop in
-- **Deploy:** Vercel
+It's deliberately not a loop. A spinning logo gets annoying fast — one that arrives and stops feels confident.
 
-## Why not trace the JPEG?
+## Stack
 
-Tracing a raster into a vector produces slightly-off letterforms — the
-wordmark is text, and the spiral's curve was designed precisely. The right
-move is to animate the actual source file, not to approximate it.
+Vite + TypeScript + GSAP.
+
+I picked GSAP over CSS `@keyframes` because the sequence needs two coordinated tweens (spiral entrance + spin, wordmark fade) with overlapping timing. That's fiddly in raw CSS.
+
+## How it works
+
+The SVG has two groups:
+
+    <g id="amolfi-spiral">   ← rotated
+    <g id="amolfi-wordmark"> ← still
+
+The animation only touches `#amolfi-spiral`. The wordmark fades in at the start and never moves after that.
+
+Rotation origin is set to the spiral's visual center. Getting this wrong is what makes amateur SVG animations wobble — the mark ends up orbiting the SVG's top-left corner instead of its own axis.
+
+## Easing choices
+
+| Phase | Ease | Why |
+|---|---|---|
+| Spiral entrance | `back.out(2.2)` | Slight overshoot, then settles. Feels physical. |
+| Wordmark fade | `power2.out` | Gentle. |
+| Spin | `power3.out` | Fast start, smooth stop. |
+
+## Timing
+
+- 0.0–0.9s: spiral and wordmark fade in together
+- 0.9–3.9s: spiral spins 2 turns, decelerating
+- After 3.9s: everything still
+
+## Accessibility
+
+`prefers-reduced-motion` is respected. Users who've asked for reduced motion see the logo rendered immediately, no animation.
+
+## Performance
+
+Transform-only animation, GPU-composited. 60fps in DevTools.
+
+## Running locally
+
+    npm install
+    npm run dev      # localhost:5173
+    npm run build    # production build
+
+## With more time
+
+- **Designer pass.** Easing and timing are my call. A designer would likely tune both.
+- **Hover interaction.** A subtle re-spin on hover would work in an interactive context. Didn't add it — the brief was a standalone animation.
+- **Dark background variant.** The wordmark is `#171717`; it'd need a light version for dark UIs.
+
+## Note on the source file
+
+The email attachment was a 180×180 JPEG. I asked for the original SVG instead of tracing the raster — traced letterforms look off, and the spiral's curve was designed precisely. The source SVG is committed as `amolfi-logo.svg`.
+
+## Repo
+
+Part of [amolfi-takehome](../README.md).

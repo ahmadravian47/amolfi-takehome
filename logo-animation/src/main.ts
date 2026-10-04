@@ -1,60 +1,55 @@
-import './style.css'
-import heroImg from './assets/hero.png'
-import typescriptLogo from './assets/typescript.svg'
-import viteLogo from './assets/vite.svg'
-import { setupCounter } from './counter.ts'
+import "./style.css";
+import { gsap } from "gsap";
+import logoSvg from "../amolfi-logo.svg?raw";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${typescriptLogo}" class="framework" alt="TypeScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.ts</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+const app = document.querySelector<HTMLDivElement>("#app")!;
+app.innerHTML = logoSvg;
 
-<div class="ticks"></div>
+const svg = app.querySelector("svg")!;
+const spiral = svg.querySelector<SVGGElement>("#amolfi-spiral")!;
+const wordmark = svg.querySelector<SVGGElement>("#amolfi-wordmark")!;
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://www.typescriptlang.org" target="_blank">
-          <img class="button-icon" src="${typescriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+if (!spiral || !wordmark) {
+  throw new Error("[logo] spiral or wordmark not found in SVG");
+}
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+gsap.set(wordmark, { opacity: 0, x: -20 });
+gsap.set(spiral, {
+  opacity: 0,
+  scale: 0.5,
+  transformOrigin: "center center",
+});
+
+const tl = gsap.timeline();
+
+// Spiral and wordmark arrive together.
+tl.to(spiral, {
+  opacity: 1,
+  scale: 1,
+  duration: 0.9,
+  ease: "back.out(2.2)",
+});
+
+tl.to(
+  wordmark,
+  {
+    opacity: 1,
+    x: 0,
+    duration: 0.9,
+    ease: "power2.out",
+  },
+  "<",
+);
+
+// Single spin: two full turns, decelerating smoothly to a stop.
+if (!prefersReducedMotion) {
+  tl.to(spiral, {
+    rotation: 720,
+    duration: 3,
+    ease: "power3.out",
+  });
+}
